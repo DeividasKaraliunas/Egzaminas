@@ -9,8 +9,22 @@ const getUsers = async (req, res) => {
     }
 };
 
-const postUser = (req, res) => {
-    res.send(200).json('POST')
+const postUser = async (req, res) => {
+    const { name, age, email, password } = req.body;
+    try {
+        const newUser = await UserModel.create({ name, age, email, password });
+        res.send(200).json({
+            user: {
+                id: newUser.id,
+                name: newUser.name,
+                age: newUser.age,
+                email: newUser.email,
+                password: newUser.password
+            }
+        })
+    } catch (error) {
+        res.send(404).json({ message: error.message })
+    }
 };
 
 const updateUser = (req, res) => {

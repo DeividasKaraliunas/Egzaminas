@@ -1,6 +1,11 @@
 const express = require('express');
+const cors = require('cors');
+const morgan = require('morgan');
 
 const server = express();
+
+server.use(cors());
+server.use(morgan('tiny'));
 
 server.get('/', (req,res) => {
     res.send('Working...')

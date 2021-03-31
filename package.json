@@ -4,7 +4,7 @@
   "description": "FullStack baigiamasis egzaminas",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "nodemon server/index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/DeividasKaraliunas/Egzaminas/issues"
   },
-  "homepage": "https://github.com/DeividasKaraliunas/Egzaminas#readme"
+  "homepage": "https://github.com/DeividasKaraliunas/Egzaminas#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
 }

@@ -17,6 +17,7 @@ const {
 
 server.use(cors());
 server.use(morgan('tiny'));
+server.use(express.json());
 
 server.use('/users', usersRouter)
 server.get('/', (req, res) => {

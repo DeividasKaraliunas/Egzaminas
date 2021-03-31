@@ -3,9 +3,9 @@ const UserModel = require('../models/UserModel');
 const getUsers = async (req, res) => {
     try {
         const DBUsers = await UserModel.find();
-        res.send(200).json({ users: DBUsers })
+        res.status(200).json({ users: DBUsers })
     } catch (error) {
-        res.send(404).json({ message: error.message })
+        res.status(404).json({ message: error.message })
     }
 };
 
@@ -13,7 +13,7 @@ const postUser = async (req, res) => {
     const { name, age, email, password } = req.body;
     try {
         const newUser = await UserModel.create({ name, age, email, password });
-        res.send(200).json({
+        res.status(200).json({
             user: {
                 id: newUser.id,
                 name: newUser.name,
@@ -23,7 +23,7 @@ const postUser = async (req, res) => {
             }
         })
     } catch (error) {
-        res.send(404).json({ message: error.message })
+        res.status(404).json({ message: error.message })
     }
 };
 
@@ -31,11 +31,11 @@ const updateUser = async (req, res) => {
     const { id } = req.params
     try {
         const updatedUser = await UserModel.findByIdAndUpdate(id, req.body, { new: true });
-        res.send(200).json({
+        res.status(200).json({
             user: updatedUser
         });
     } catch (error) {
-        res.send(404).json({ message: error.message })
+        res.status(404).json({ message: error.message })
     }
 };
 
@@ -43,7 +43,7 @@ const deleteUser = async (req, res) => {
     const {id} = req.params;
     try{
 const deletedUser = await UserModel.findByIdAndDelete(id);
-        res.send(200).json({
+        res.status(200).json({
             user: {
                 id: deletedUser.id,
                 name: deletedUser.name,
@@ -53,7 +53,7 @@ const deletedUser = await UserModel.findByIdAndDelete(id);
             }
         })
     }catch(error){
-        res.send(404).json({ message: error.message })
+        res.status(404).json({ message: error.message })
     }
 };
 

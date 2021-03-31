@@ -27,8 +27,16 @@ const postUser = async (req, res) => {
     }
 };
 
-const updateUser = (req, res) => {
-    res.send(200).json('UPDATE')
+const updateUser = async (req, res) => {
+    const { id } = req.params
+    try {
+        const updatedUser = await UserModel.findByIdAndUpdate(id, req.body, { new: true });
+        res.send(200).json({
+            user: updatedUser
+        });
+    } catch (error) {
+        res.send(404).json({ message: error.message })
+    }
 };
 
 const deleteUser = (req, res) => {

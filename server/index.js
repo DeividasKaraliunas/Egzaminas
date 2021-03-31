@@ -3,6 +3,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 require('dotenv').config({ path: 'server/.env' });
+const usersRouter = require('./routes/users');
 
 const server = express();
 
@@ -17,6 +18,7 @@ const {
 server.use(cors());
 server.use(morgan('tiny'));
 
+server.use('/users', usersRouter)
 server.get('/', (req, res) => {
     res.send('Working...')
 });
@@ -31,3 +33,4 @@ db.on('connected', () => {
     });
 })
 
+db.on('error' , (error) => console.error('Error: Failed to connect to DB:' + error))

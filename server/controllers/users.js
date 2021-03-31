@@ -39,8 +39,22 @@ const updateUser = async (req, res) => {
     }
 };
 
-const deleteUser = (req, res) => {
-    res.send(200).json('DELETE')
+const deleteUser = async (req, res) => {
+    const {id} = req.params;
+    try{
+const deletedUser = await UserModel.findByIdAndDelete(id);
+        res.send(200).json({
+            user: {
+                id: deletedUser.id,
+                name: deletedUser.name,
+                age: deletedUser.age,
+                email: deletedUser.email,
+                password: deletedUser.password
+            }
+        })
+    }catch(error){
+        res.send(404).json({ message: error.message })
+    }
 };
 
 module.exports = {
